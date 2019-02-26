@@ -33,11 +33,9 @@
     <div class="row" style="padding-top:10px; !important">
         <div class="col-md-12">
         <ul class="pagination">
-  <li class="page-item" v-for="sbj in subjectList"><a class="page-link" nav-link="">{{sbj.program}}</a></li>
-  <!-- <li class="page-item"><a class="page-link" nav-link="">2</a></li>
-  <li class="page-item"><a class="page-link" nav-link="">3</a></li>
-  <li class="page-item"><a class="page-link" nav-link="">4</a></li>
-  <li class="page-item"><a class="page-link" nav-link="">5</a></li> -->
+  <li class="page-item" v-for="sbj in subjectList">
+    <a class="page-link" nav-link="">{{sbj.program}}</a>
+  </li>
 </ul>
 </div>
     </div>
@@ -81,73 +79,52 @@
             <div class="row">
                 <div class="col-md-4">
                     <label for="options">Option 1: </label>
-                    <div class=" radio">
+                    <div class=" radio" v-for="sbj in subjectList">
                         <label>
-                            <input type="radio" name="optr1adio" v-model="candidate.option1" value="1">SOF</label>
+                            <input type="radio" name="optr1adio"
+                                v-model="candidate.option1" 
+                                v-bind:value="sbj.choice_id">{{ sbj.program }}
+                            </label>
                     </div>
-                    <div class=" radio">
-                        <label><input type="radio" name="optr1adio" v-model="candidate.option1" value="2">NET</label>
-                    </div>
-                    <div class=" radio">
-                        <label><input type="radio" name="optr1adio" v-model="candidate.option1" value="3">MMW</label>
-                    </div>
-                    <div class=" radio">
-                        <label><input type="radio" name="optr1adio" v-model="candidate.option1" value="4">MEC</label>
-                    </div>
-                    <div class=" radio">
-                        <label><input type="radio" name="optr1adio" v-model="candidate.option1" value="5">BST</label>
-                    </div>
+                    
                 </div>
                
                <div class="col-md-4">
                     <label for="options">Option 2: </label>
-                    <div class="radio">
+                    <div class=" radio" v-for="sbj in subjectList">
                         <label>
-                        <input type="radio" name="optr2adio" v-model="candidate.option2" value="1">SOF</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="optr2adio" v-model="candidate.option2" value="2">NET</label>
-                    </div>
-                    <div class=" radio">
-                        <label><input type="radio" name="optr2adio" v-model="candidate.option2" value="3">MMW</label>
-                    </div>
-                    <div class=" radio">
-                        <label><input type="radio" name="optr2adio" v-model="candidate.option2" value="4">MEC</label>
-                    </div>
-                    <div class=" radio">
-                        <label><input type="radio" name="optr2adio" v-model="candidate.option2" value="5">BST</label>
+                            <input type="radio" name="optr2adio"
+                                v-model="candidate.option2" 
+                                v-bind:value="sbj.choice_id">{{ sbj.program }}
+                            </label>
                     </div>
                </div>
 
                 <div class="col-md-4">
                     <label for="options">Option 3: </label>
-                    <div class="radio">
-                        <label><input type="radio" name="optr3adio" v-model="candidate.option3" value="1">SOF</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="optr3adio" v-model="candidate.option3" value="2">NET</label>
-                    </div>
-                    <div class=" radio">
-                        <label><input type="radio" name="optr3adio" v-model="candidate.option3" value="3">MMW</label>
-                    </div>
-                    <div class=" radio">
-                        <label><input type="radio" name="optr3adio" v-model="candidate.option3" value="4">MEC</label>
-                    </div>
-                    <div class=" radio">
-                        <label><input type="radio" name="optr3adio" v-model="candidate.option3" value="5">BST</label>
+                    <div class=" radio" v-for="sbj in subjectList">
+                        <label>
+                            <input type="radio" name="optr3adio"
+                                v-model="candidate.option3" 
+                                v-bind:value="sbj.choice_id">{{ sbj.program }}
+                            </label>
                     </div>
                 </div>
                 
             </div>
-
-             <div class="form-group">
+            
+            <div class="form-group" v-if="">
+                    
+            </div>
+            
+            <div class="form-group">
                  <label>Z-Score: </label>
                  <input type="number" class="form-control" id="candidatezscore" name="candidatezscore" placeholder="Candidate Z-Score" v-model="candidate.zscore">
             </div>
                
     <div class="btn-group" role="group">
 
-    <button type="button" class="btn btn-primary" @click='' ><h5>Next Record</h5></button>
+    <button type="button" class="btn btn-primary" @click='addtoarray()'><h5>Next Record</h5></button>
 
     <button type="button" class="btn btn-primary"  @click='save()'><h5>Save</h5></button>
     </div>
@@ -182,7 +159,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="cand in candidates">
-                        <td>{{ cand.name }}</td>
+                        <td>{{ cand.cand_name }}</td>
                         <td>{{ cand.nic }}</td>
                         <td>{{ cand.alstream }}</td>
                         <td>{{ cand.zscore }}</td> 
@@ -193,7 +170,7 @@
                 <div class="col-md-6">
                     <table v-if="filtered == true" class="table table-bordered table-striped">
                 <thead>
-                    <td>Name</td>
+                    <!-- <td>Name</td> -->
                     <td>NIC</td>
                     <td>A/L Stream</td>
                     <td>Z-Score</td>
@@ -203,7 +180,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="cand in candidateList">
-                        <td>{{ cand.name }}</td>
+                        <!-- <td>{{ cand.cand_name }}</td> -->
                         <td>{{ cand.nic }}</td>
                         <td>{{ cand.alstream }}</td>
                         <td>{{ cand.zscore }}</td> 
@@ -259,7 +236,11 @@ export default{
                 option1:    '',
                 option2:    '',
                 option3:    ''
-            }
+            },
+
+            candidate_array:{}
+
+
         }
         
     },
@@ -302,6 +283,12 @@ export default{
         app.list_view   = false,
         app.filtered    = false
        },
+
+       addtoarray(){
+        var app = this;
+            app.candidate_array.push(app.candidate)
+            console.log(app.candidate_array)
+       }
 
     }
 

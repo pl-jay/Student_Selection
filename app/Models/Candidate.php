@@ -19,5 +19,7 @@ class Candidate extends Model
         'option1',
         'option2',
         'option3'
-    );
+	);
+	
+	protected $timestamp = false;
 }

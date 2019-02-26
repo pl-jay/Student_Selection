@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Choices extends Model
 {
 	protected $table = 'choices';
-	protected $primaryKey = 'idoptions';
+	protected $primaryKey = 'choice_id';
     protected $fillable = array(
-    	'program'
-    );
+    	'program','limit'
+	);
+	protected $timestamp = false;
 }
