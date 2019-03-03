@@ -23,8 +23,7 @@ import VueRouter from 'vue-router';
 
 
 import SSU from './components/SelectionView.vue';
-import FS from './components/FinalSelection.vue';
-import US from './components/UltimateSelection.vue';
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -36,8 +35,6 @@ const router = new VueRouter({
 	routes : [
       // Special Route 
       { path: '/ssuTest', component: SSU, name:'ssu' },
-      { path: '/ssuTest2', component: FS, name:'fs' },
-      { path: '/ssuTest3', component: US, name:'us' },
     ]
 });
 

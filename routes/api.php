@@ -46,12 +46,7 @@ Route::group(['middleware' => 'cors','prefix' => '/ssu', 'namespace' => 'Api', '
     Route::get('wholeList','SelectionController@wholeList');
 
     Route::get('enroll/{c_nic}/{enroll_bit}','SelectionController@registraionProcess');
-
-
-
-
-    
-    
+  
      
 });
 //end ssu TEST
